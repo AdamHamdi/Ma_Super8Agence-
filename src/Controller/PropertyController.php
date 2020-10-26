@@ -53,8 +53,8 @@ class PropertyController extends AbstractController
          //suite de la premiere methode
         //  $this->repository;
         //troisieme methode 
-        $repository = $this->repository->findAllVisisble();
-        dump($repository);
+        // $repository = $this->repository->findAllVisisble();
+        // dump($repository);
         return $this->render('property/index.html.twig', [
             'current_menu' => 'properties',
         ]);
