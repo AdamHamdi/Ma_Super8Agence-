@@ -32,7 +32,7 @@ class PropertyRepository extends ServiceEntityRepository
     
     }
      /**
-     * cette methode permet de retourne les biens qui ne sont pas vendus 
+     * cette methode permet de retourne les qutres derniers biens qui ne sont pas vendus 
      */
     public function findLatest():array
     {
