@@ -33,7 +33,7 @@ class PropertyController extends AbstractController
                  $em->flush();
 
         return $this->render('property/index.html.twig', [
-            'current_menu' => 'properties',
+            'current_menu' => 'properties'
         ]);
     }
 }

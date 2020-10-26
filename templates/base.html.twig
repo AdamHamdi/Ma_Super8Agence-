@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Ma Super Agence{% endblock %}</title>
         {% block stylesheets %}  
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         {% endblock %}
@@ -17,7 +17,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto ">
                     <li class="nav-item ">
-                        <a class="nav-link  {% if current_menu == 'properties' %} active {% endif %} " href="{{ path('property.index') }}">Acheter <span class="sr-only">(current)</span></a>
+                    {# {% if current_menu == 'properties' %} active {% endif %} #}
+                        <a class="nav-link   " href="{{ path('property.index') }}">Acheter <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="#">Link</a>
