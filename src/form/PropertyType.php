@@ -7,7 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 class PostType extends AbstractType{
@@ -20,7 +21,8 @@ class PostType extends AbstractType{
                    ->add('bedrooms')
                    ->add('floor')
                    ->add('price')
-                   ->add('heat')
+                //    ->add('heat', choiceType::class,['choises' => Property::HEAT])
+                   ->add('heat', choiceType::class,['choises' => $this->getChoices()])
                    ->add('city')
                    ->add('address')
                    ->add('postal_code')
@@ -33,5 +35,13 @@ class PostType extends AbstractType{
             'data_class' => Post::class,
             'translation_domain' => 'forms'
         ]);
+    }
+    private function getChoices(){
+        $choices=Property::HEAT;
+        $output=[];
+        foreach($choices as $k =>$v){
+            $output[$v]=$k;
+        }
+        return $output;
     }
 }
