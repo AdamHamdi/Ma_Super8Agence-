@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %} {% block title %}:{% endblock %} {% block body %}
+{% extends 'base.html.twig' %} {% block title %}{{ property.title}}:{% endblock %} {% block body %}
 <div class="container">
-    <h1>{{ property.title}}</h1>
+    <h1 class="mx-auto">{{ property.title}}</h1>
 </div>
 
 {% endblock %}
