@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %} {% block body %}
-<div class="container">
+<div class="container mt-5">
     <h1>Editer le bien</h1>
     {{form_start(form) }}
     <div class="row">
-        <div class="col-md-4">{{ form_row(form_title)}}</div>
-        <div class="col-md-4">{{ form_row(form_surface)}}</div>
-        <div class="col-md-4">{{ form_row(form_price)}}</div>
+        <div class="col-md-4">{{ form_row(form.title)}}</div>
+        <div class="col-md-4">{{ form_row(form.surface)}}</div>
+        <div class="col-md-4">{{ form_row(form.price)}}</div>
     </div>
     <div class="row">
         <div class="col-md-2">{{ form_row(form.rooms)}}</div>
@@ -21,7 +21,7 @@
         <div class="col-md-2">{{ form_row(form.sold)}}</div>
     </div>
     {{ form_widget(form) }}
-    <button class="btb btn-primary">Editer</button> {{ form_end(form) }}
+    <button class="btb btn-primary" type='submit'>Editer</button> {{ form_end(form) }}
 </div>
 
 {% endblock %}

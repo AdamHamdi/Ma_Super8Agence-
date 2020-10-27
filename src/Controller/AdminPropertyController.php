@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Entity\Property;
+use App\form\PropertyType;
 use App\Repository\PropertyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,7 @@ class AdminPropertyController extends AbstractController
     public function index(): Response
     {
         $properties = $this->repository->findAll();
-        return $this->render('admin/property/index',compact('properties'));
+        return $this->render('admin/property/index.html.twig',compact('properties'));
     }
     /**
      * @Route("/admin/{id}", name="admin.property.edit")
@@ -30,21 +31,21 @@ class AdminPropertyController extends AbstractController
      * @return \Syfony\Component\HttpFoundation\Response
      */
     public function edit (Property $property, Request $request){
-        $form= $this->createForm(PropertyType::class,$property);
+        $form= new Property();
+        $form= $this->createForm(PropertyType::class,$form);
         $form->handleRequest($request);
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
+      
             if($form->isSubmitted() && $form->isValid()){
                  $this->entityManager=$this->getDoctrine()->getManager();
                  $this-> entityManager->persist( $form);
                  $this-> entityManager->flush();
                  $this->flashMessage->add('success','Cet article a été ajouté avec success');
           
-                 return new RedirectResponse(
-                 $this->router->generate('home')
-                 );
-        }}
-        return $this->render('admin/property/edit',[
+                 return $this->redirectToRoute('admin.property.index');
+                 
+                 
+        }
+        return $this->render('admin/property/edit.html.twig',[
             'property'=>$property,
             'form'=>$form->createView()
         ]);

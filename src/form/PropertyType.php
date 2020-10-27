@@ -11,37 +11,40 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-class PostType extends AbstractType{
-    public function buildForm(FormBuilderInterface $bulder, array $options){
-
-            $bulder->add('title')
+class PropertyType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $bulder, array $options)
+    {
+        $bulder->add('title')
                    ->add('description')
                    ->add('surface')
                    ->add('rooms')
                    ->add('bedrooms')
                    ->add('floor')
                    ->add('price')
-                //    ->add('heat', choiceType::class,['choises' => Property::HEAT])
-                   ->add('heat', choiceType::class,['choises' => $this->getChoices()])
+                   ->add('heat')
+                //    ->add('heat', ChoiceType::class, ['choises' => $this->getChoices()])
                    ->add('city')
                    ->add('address')
                    ->add('postal_code')
-                   ->add('sold')
-                   ->add('Valider',SubmitType::class);
+                   ->add('sold');
+                   
     }
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Post::class,
-            'translation_domain' => 'forms'
+            'data_class' => Property::class,
+           // 'translation_domain' => 'forms'
         ]);
     }
-    private function getChoices(){
-        $choices=Property::HEAT;
-        $output=[];
-        foreach($choices as $k =>$v){
-            $output[$v]=$k;
-        }
-        return $output;
-    }
+    //private function getChoices()
+    // {
+    //     $choices=Property::HEAT;
+    //     $output=[];
+    //     foreach ($choices as $k =>$v) {
+    //         $output[$v]=$k;
+    //     }
+    //     return $output;
+    // }
+
 }
