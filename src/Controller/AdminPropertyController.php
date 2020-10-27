@@ -45,7 +45,10 @@ class AdminPropertyController extends AbstractController
                  $this->em=$this->getDoctrine()->getManager();
                  $this->em->persist($property);
                  $this->em->flush();
+                 $this->addFlash('success','Le bien a été ajouté avec success');
                  return $this->redirectToRoute('admin.property.index');
+                 
+         
                
         }
         return $this->render('admin/property/new.html.twig',[
@@ -74,7 +77,8 @@ class AdminPropertyController extends AbstractController
                  
                
                  $this->em->flush();
-                
+                 $this->addFlash('success','Ce bien a été modifié avec success');
+         
           
                  return $this->redirectToRoute('admin.property.index');
                
@@ -91,6 +95,7 @@ class AdminPropertyController extends AbstractController
     {
         $this->em->remove($property);
         $this->em->flush();
+        $this->addFlash('danger', 'Ce bien a été supprimé avec success');
         return $this->redirectToRoute('admin.property.index');
                
         

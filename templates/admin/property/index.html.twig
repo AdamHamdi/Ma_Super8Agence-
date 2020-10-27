@@ -3,7 +3,16 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <h1>Gerer les biens</h1>
+            <h1>Gérer les biens</h1>
+
+            {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+            {% endfor %} {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>{% endfor%}
             <div class="text-right">
                 <a href=" {{ path('admin.property.create') }} " class="btn btn-success btn-sm ">Ajouter un nouveau bien</a>
 
@@ -19,6 +28,7 @@
                     <td>
                         <form action="{{ path('admin.property.delete',{'id':property.id}) }}" method="post" onsubmit="return confirm('Voulez vous vraiment supprimer ce bien ?');">
                             <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
                             <a href="{{ path( 'admin.property.edit',{ 'id':property.id})}} " class=" btn btn-sm btn-warning ">Edit</a>
                             <button type="submit" class=" btn btn-sm btn-danger ">Supprimer</button>
                         </form>
