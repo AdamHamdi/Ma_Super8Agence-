@@ -4,18 +4,34 @@ namespace App\Controller;
 use App\Entity\Property;
 use App\form\PropertyType;
 use App\Repository\PropertyRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
+
+
+
 
 class AdminPropertyController extends AbstractController
 {
     private $repository;
-    public function __construct(PropertyRepository $repository)
-    {
+    private $em;
+   
+    public function __construct( PropertyRepository $repository ,EntityManagerInterface $em){
+        
+        
         $this->repository=$repository;
+        $this->em=$em;
     }
     /**
      * @Route("/admin", name="admin.property.index")
@@ -31,15 +47,14 @@ class AdminPropertyController extends AbstractController
      * @return \Syfony\Component\HttpFoundation\Response
      */
     public function edit (Property $property, Request $request){
-        $form= new Property();
-        $form= $this->createForm(PropertyType::class,$form);
+       
+        $form=$this->formFactory->create(PropertyType::class,$property);
         $form->handleRequest($request);
-      
-            if($form->isSubmitted() && $form->isValid()){
-                 $this->entityManager=$this->getDoctrine()->getManager();
-                 $this-> entityManager->persist( $form);
-                 $this-> entityManager->flush();
-                 $this->flashMessage->add('success','Cet article a été ajouté avec success');
+        if($form->isSubmitted() && $form->isValid()){
+                 
+               
+                 $this->em->flush();
+                
           
                  return $this->redirectToRoute('admin.property.index');
                  

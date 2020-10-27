@@ -22,8 +22,8 @@ class PropertyType extends AbstractType
                    ->add('bedrooms')
                    ->add('floor')
                    ->add('price')
-                   ->add('heat')
-                //    ->add('heat', ChoiceType::class, ['choises' => $this->getChoices()])
+                  ->add('heat')
+                //  ->add('heat', ChoiceType::class, ['choises' => $this->getChoices()])
                    ->add('city')
                    ->add('address')
                    ->add('postal_code')
@@ -37,14 +37,14 @@ class PropertyType extends AbstractType
            // 'translation_domain' => 'forms'
         ]);
     }
-    //private function getChoices()
-    // {
-    //     $choices=Property::HEAT;
-    //     $output=[];
-    //     foreach ($choices as $k =>$v) {
-    //         $output[$v]=$k;
-    //     }
-    //     return $output;
-    // }
+    private function getChoices()
+    {
+        $choices=Property::HEAT;
+        $output=[];
+        foreach ($choices as $k => $v) {
+            $output[$v]=$k;
+        }
+        return $output;
+    }
 
 }
