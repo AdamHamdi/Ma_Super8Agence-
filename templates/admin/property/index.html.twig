@@ -1,8 +1,36 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %} {% block title %}Hello AdminPropertyController!{% endblock %} {% block body %}
 
-{% block title %}Hello AdminPropertyController!{% endblock %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h1>Gerer les biens</h1>
+            <div class="text-right">
+                <a href=" {{ path('admin.property.create') }} " class="btn btn-success btn-sm ">Ajouter un nouveau bien</a>
 
-{% block body %}
+            </div>
+            <table class="table table-striped mt-1 ">
+                <tr>
+                    <td>Titre </td>
+                    <td>Actions</td>
+                </tr>
+                {% for property in properties %}
+                <tr>
+                    <td>{{ property.title}} </td>
+                    <td>
+                        <form action="{{ path('admin.property.delete',{'id':property.id}) }}" method="post" onsubmit="return confirm('Voulez vous vraiment supprimer ce bien ?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <a href="{{ path( 'admin.property.edit',{ 'id':property.id})}} " class=" btn btn-sm btn-warning ">Edit</a>
+                            <button type="submit" class=" btn btn-sm btn-danger ">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+
+        </div>
+    </div>
 
 </div>
+
 {% endblock %}

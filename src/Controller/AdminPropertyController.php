@@ -34,6 +34,26 @@ class AdminPropertyController extends AbstractController
         $this->em=$em;
     }
     /**
+     * @Route("/admin/property/create" , name="admin.property.create")
+     */
+    public function new(Request $request)
+    {
+        $property= new Property();
+        $form=$this->createForm(PropertyType::class,$property);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+                 $this->em=$this->getDoctrine()->getManager();
+                 $this->em->persist($property);
+                 $this->em->flush();
+                 return $this->redirectToRoute('admin.property.index');
+               
+        }
+        return $this->render('admin/property/new.html.twig',[
+            'property'=>$property,
+            'form'=>$form->createView()
+        ]);
+    }
+    /**
      * @Route("/admin", name="admin.property.index")
      */
     public function index(): Response
@@ -42,13 +62,13 @@ class AdminPropertyController extends AbstractController
         return $this->render('admin/property/index.html.twig',compact('properties'));
     }
     /**
-     * @Route("/admin/{id}", name="admin.property.edit")
+     * @Route("/admin/property/{id}", name="admin.property.edit")
      * @param Property $property
      * @return \Syfony\Component\HttpFoundation\Response
      */
     public function edit (Property $property, Request $request){
        
-        $form=$this->formFactory->create(PropertyType::class,$property);
+        $form=$this->createForm(PropertyType::class,$property);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
                  
@@ -57,12 +77,23 @@ class AdminPropertyController extends AbstractController
                 
           
                  return $this->redirectToRoute('admin.property.index');
-                 
-                 
+               
         }
         return $this->render('admin/property/edit.html.twig',[
             'property'=>$property,
             'form'=>$form->createView()
         ]);
+    }
+    /**
+     * @Route("/admin/property/delete/{id}", name="admin.property.delete" ,methods="DELETE")
+     */
+    public function delete(Property $property)
+    {
+        $this->em->remove($property);
+        $this->em->flush();
+        return $this->redirectToRoute('admin.property.index');
+               
+        
+        
     }
 }
