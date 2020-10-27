@@ -18,40 +18,43 @@
 
 </div>
 <div class="container mt-5">
-
-
-    <nav class="nav nav-tabs mb-4" id='tabs'></nav>
-    <p>{{ property.description|nl2br}}</p>
     <div class="row">
-        <div class="col-md-8">
-            <h2>Caractéristiques</h2>
-            <table class="table table-striped">
-                <tr>
-                    <td>Surface habitable</td>
-                    <td>{{ property.surface}}m<sup>2</sup></td>
-                </tr>
-                <tr>
-                    <td>Pièces</td>
-                    <td>{{ property.rooms}} </td>
-                </tr>
-                <tr>
-                    <td>Chambres</td>
-                    <td>{{ property.bedrooms}}</td>
-                </tr>
-                <tr>
-                    <td>Etage</td>
-                    <td>{{ property.floor}}</td>
-                </tr>
-                <tr>
-                    <td>Chauffage</td>
-                    <td>{{ property.heatType}}</td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-md-4">
-            <h2>Spécificités</h2>
-        </div>
-    </div>
-</div>
 
-{% endblock %}
+        <div class="col-md-8">
+
+
+            <nav class="nav nav-tabs mb-4" id='tabs'></nav>
+            <p>{{ property.description|nl2br}}</p>
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>Caractéristiques</h2>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Surface habitable</td>
+                            <td>{{ property.surface}}m<sup>2</sup></td>
+                        </tr>
+                        <tr>
+                            <td>Pièces</td>
+                            <td>{{ property.rooms}} </td>
+                        </tr>
+                        <tr>
+                            <td>Chambres</td>
+                            <td>{{ property.bedrooms}}</td>
+                        </tr>
+                        <tr>
+                            <td>Etage</td>
+                            <td>{{ property.floor}}</td>
+                        </tr>
+                        <tr>
+                            <td>Chauffage</td>
+                            <td>{{ property.heatType}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <h2>Spécificités</h2>
+                </div>
+            </div>
+        </div>
+
+        {% endblock %}
