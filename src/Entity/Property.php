@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 use Cocur\Slugify\RuleProvider\DefaultRuleProvider;
 use Cocur\Slugify\RuleProvider\RuleProviderInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
@@ -36,6 +37,7 @@ class Property
 
     /**
      * @ORM\Column(type="integer")
+     *  * @Assert\Range(min=10 , max=400)
      */
     private $surface;
 
