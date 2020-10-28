@@ -1,11 +1,9 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: 
-                from_database:
+                     users:
                         entity:
                             class: App\Entity\User
-                            property: username
 
                  
     firewalls:
@@ -14,7 +12,7 @@ security:
             security: false
         main:
             anonymous: true
-            provider: users_in_memory
+            #provider: users_in_memory
 
            # http_basic: true
             # activate different ways to authenticate
