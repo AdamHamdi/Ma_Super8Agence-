@@ -1,14 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %} {% block title %}Voir tous nos biens :{% endblock %} {% block body %}
 
-{% block title %}Voir tous nos biens :{% endblock %}
 
-{% block body %}
-
-    <div class="jumbotron text-center">
-        <h1> Voir tous nos biens</h1>
-        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab officia repellat temporibus, possimus alias aperiam dolores, mollitia, omnis architecto earum quod molestiae culpa id! Ab nostrum aliquid cupiditate corporis at?</p>
-
-    </div>
 <div class="container mt-5">
+    <h1 class="text-center">Voir tous nos biens</h1>
+    <div class="row">
+        {% for property in properties %}
+        <div class="col-md-4">
+            {% include 'property/_property.html.twig' %}
+        </div>
+        {% endfor %}
+    </div>
+
 </div>
 {% endblock %}
