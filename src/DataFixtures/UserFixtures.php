@@ -21,7 +21,10 @@ class UserFixtures extends Fixture
                           $user,
                            'adam'
              ));
-             $manager->persist($user);
+            
+             
+
+             
              $manager->flush();
     }
 }
