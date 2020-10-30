@@ -43,6 +43,14 @@ class PropertyRepository extends ServiceEntityRepository
         
     
     }
+    public function findAllQuery()
+    {
+        return $this->createQueryBuilder('p')
+        ->getQuery()
+        ;
+        
+    
+    }
      /**
      * cette methode permet de retourne les qutres derniers biens qui ne sont pas vendus 
      */

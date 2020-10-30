@@ -18,9 +18,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ManagerRegistry;
-
-
-
+use Knp\Component\Pager\PaginatorInterface;
 
 class AdminPropertyController extends AbstractController
 {
@@ -59,9 +57,10 @@ class AdminPropertyController extends AbstractController
     /**
      * @Route("/admin", name="admin.property.index")
      */
-    public function index(): Response
+    public function index(PaginatorInterface $paginator ,Request $request): Response
     {
-        $properties = $this->repository->findAll();
+        $properties = $paginator->paginate($this->repository->findAllQuery(),
+           $request->query->getInt('page', 1),12);
         return $this->render('admin/property/index.html.twig',compact('properties'));
     }
     /**
