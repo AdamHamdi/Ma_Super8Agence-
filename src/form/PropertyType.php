@@ -1,6 +1,7 @@
 <?php 
 
 namespace App\form;
+
 use App\Entity\Property;
 use phpDocumentor\Reflection\Types\False_;
 use Symfony\Component\Form\AbstractType;
@@ -34,7 +35,7 @@ class PropertyType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Property::class,
-           // 'translation_domain' => 'forms'
+            'translation_domain' => 'forms'
         ]);
     }
     private function getChoices()

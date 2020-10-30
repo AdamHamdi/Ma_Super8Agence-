@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Property;
+use App\Entity\PropertySearch;
+use App\Form\PropertySearchType;
 use App\Repository\PropertyRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -59,13 +61,19 @@ class PropertyController extends AbstractController
             //creer une entité qui va representer notre recherche
             //creer un formulaire
             //gerer le traitement dans le controlleur
-        $properties = $paginator->paginate($this->repository->findAllVisisbleQuery(),
-           $request->query->getInt('page', 1),12);
-        // dump($repository);
-        return $this->render('property/index.html.twig', [
-            'current_menu' => 'properties',
-            'properties'=>$properties
-        ]);
+            $search = new PropertySearch();
+            $form=$this->createForm(PropertySearchType::class, $search);
+            $form->handleRequest($request);
+
+            $properties = $paginator->paginate($this->repository->findAllVisisbleQuery($search),
+            $request->query->getInt('page', 1),12);
+            // dump($repository);
+            return $this->render('property/index.html.twig', [
+                'current_menu' => 'properties',
+                'properties'=>$properties,
+                //for the filtre
+                'form' => $form->createView()
+            ]);
     }
 
     /**
@@ -76,7 +84,8 @@ class PropertyController extends AbstractController
         $property=$this->repository->find($id);
         return $this->render('property/show.html.twig',[
             'property'=>$property,
-            'current_menu'=>'properties'
+            'current_menu'=>'properties',
+            
         ]);
     }
 }

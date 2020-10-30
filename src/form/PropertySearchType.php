@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Form;
+namespace App\form;
 
 use App\Entity\PropertySearch;
-use Doctrine\DBAL\Types\IntegerType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+
 
 class PropertySearchType extends AbstractType
 {
@@ -17,18 +20,19 @@ class PropertySearchType extends AbstractType
                 'required'=>false ,
                 'label' =>false,
                 'attr'=>[
-                    'placeholder' => 'Surface minimale'
-                ]
+                    'placeholder' => 'Budget maximale'
+                ],
 
             ])
             ->add('minSurface', IntegerType::class,[
                 'required'=>false ,
                 'label' =>false,
                 'attr'=>[
-                    'placeholder' => 'Budget maximale'
-                ]
+                    'placeholder' => 'Surface minimale'
+                ],
 
             ])
+            // ->add('submit', SubmitType::class,['label'=>'Rechercher'])
         ;
     }
 
@@ -36,6 +40,13 @@ class PropertySearchType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PropertySearch::class,
+            'method' => 'get',
+            'csrf_protection' => false
+
         ]);
+    }
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }
