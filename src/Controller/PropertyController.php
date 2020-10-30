@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Property;
 use App\Repository\PropertyRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,8 +24,7 @@ class PropertyController extends AbstractController
     /**
      * @Route("/biens", name="property.index")
      */
-    public function index(): Response
-    { 
+   
         //ajouter un enregistrement dans la base de donnnées
 
         // $property= new Property();
@@ -53,7 +54,10 @@ class PropertyController extends AbstractController
          //suite de la premiere methode
         //  $this->repository;
         //troisieme methode 
-        $properties = $this->repository->findAllVisisble();
+        public function index(PaginatorInterface $paginator ,Request $request): Response
+        { 
+        $properties = $paginator->paginate($this->repository->findAllVisisbleQuery(),
+           $request->query->getInt('page', 1),12);
         // dump($repository);
         return $this->render('property/index.html.twig', [
             'current_menu' => 'properties',

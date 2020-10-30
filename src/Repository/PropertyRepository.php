@@ -23,12 +23,24 @@ class PropertyRepository extends ServiceEntityRepository
     /**
      * cette methode permet de retourne les biens qui ne sont pas vendus 
      */
-    public function findAllVisisble():array
+    // public function findAllVisisble():array
+    // {
+    //     return $this->createQueryBuilder('p')
+    //     ->Where('p.sold = false') 
+    //     ->getQuery()
+    //     ->getResult();
+    
+    // } 
+
+    /**
+     * @return Query
+     */
+    public function findAllVisisbleQuery()
     {
         return $this->createQueryBuilder('p')
-        ->Where('p.sold = false') 
         ->getQuery()
-        ->getResult();
+        ;
+        
     
     }
      /**
