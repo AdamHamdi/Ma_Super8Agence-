@@ -3,7 +3,10 @@
 namespace App\form;
 
 use App\Entity\Property;
+use App\Entity\Option;
+use Doctrine\ORM\Mapping\Entity;
 use phpDocumentor\Reflection\Types\False_;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -25,6 +28,12 @@ class PropertyType extends AbstractType
                    ->add('price')
                   //->add('heat')
                   ->add('heat', ChoiceType::class, ['choices'=> array_flip(Property::HEAT) ])
+                  ->add('options',EntityType::class,[
+                      'class' => Option::class,
+                      'choice_label'=>'name',
+                      'multiple' =>true
+
+                  ])
                    ->add('city')
                    ->add('address')
                    ->add('postal_code')
