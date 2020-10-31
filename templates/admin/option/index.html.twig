@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %} {% block title %}Gérer les options!{% endblock %} {% block body %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h1>Gérer les options</h1>
+
+            {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+            {% endfor %} {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>{% endfor%}
+            <div class="text-right">
+                <a href=" {{ path('admin.option.new') }} " class="btn btn-success btn-sm ">Ajouter un nouveau option</a>
+
+            </div>
+            <table class="table table-striped mt-1 ">
+                <tr>
+                    <td>Nom </td>
+                    <td>Actions</td>
+                </tr>
+                {% for option in options %}
+                <tr>
+                    <td>{{ option.name}} </td>
+                    <td>
+                        <form action="{{ path('admin.option.delete',{'id':option.id}) }}" method="post" onsubmit="return confirm('Voulez vous vraiment supprimer ce bien ?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ option.id) }}">
+                            <a href="{{ path( 'admin.option.edit',{ 'id':option.id})}} " class=" btn btn-sm btn-warning ">Edit</a>
+                            <button type="submit" class=" btn btn-sm btn-danger ">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+<div class="pagination float-right">
+        {{ knp_pagination_render(options) }}
+    </div>
+    <br><br>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

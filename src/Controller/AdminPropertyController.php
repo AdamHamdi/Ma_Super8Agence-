@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controller;
+
+use App\Entity\Option;
 use App\Entity\Property;
 use App\form\PropertyType;
 use App\Repository\PropertyRepository;
@@ -70,6 +72,9 @@ class AdminPropertyController extends AbstractController
      */
     public function edit (Property $property, Request $request){
        
+        //ajouter une option video 9
+        // $option = new Option();
+        // $property->addOption($option);
         $form=$this->createForm(PropertyType::class,$property);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
