@@ -3,6 +3,7 @@
 namespace App\form;
 
 use App\Entity\PropertySearch;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -32,7 +33,13 @@ class PropertySearchType extends AbstractType
                 ],
 
             ])
-            // ->add('submit', SubmitType::class,['label'=>'Rechercher'])
+            ->add('options', EntityType::class,[
+                'required'=>false,
+                'label' => false,
+                'class' =>Option::class,
+                'choice_label' => 'name ',
+                'multiple'=> true,
+            ])
         ;
     }
 

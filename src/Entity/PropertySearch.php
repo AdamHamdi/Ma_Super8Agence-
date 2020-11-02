@@ -18,6 +18,15 @@ class PropertySearch
    */
 
     private $minSurface;
+    /**
+     * @var ArrayCollection
+     */
+
+    private $option;
+
+    public function __construct (){
+        
+    }
     
    /**
    * @var int|null
