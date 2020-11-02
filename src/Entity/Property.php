@@ -119,10 +119,10 @@ class Property
     private $options;
 
     /**
-     * @ORM\Column(type="datetime")|null
+     * @ORM\Column(type="datetime"options={"nullable"=true})
      */
     private $updated_at;
-    
+
     public function __construct()
     {
         $this->created_at= new \DateTime();
@@ -379,12 +379,22 @@ class Property
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    
+
+    /**
+     * Get the value of updated_at
+     */ 
+    public function getUpdated_at()
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    /**
+     * Set the value of updated_at
+     *
+     * @return  self
+     */ 
+    public function setUpdated_at($updated_at)
     {
         $this->updated_at = $updated_at;
 
