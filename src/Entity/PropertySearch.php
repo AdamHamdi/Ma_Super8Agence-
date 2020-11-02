@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 class PropertySearch
 {
@@ -22,10 +23,10 @@ class PropertySearch
      * @var ArrayCollection
      */
 
-    private $option;
+    private $options;
 
     public function __construct (){
-        
+        $this->options = new ArrayCollection();
     }
     
    /**
@@ -69,4 +70,26 @@ class PropertySearch
 
 
 
+
+    /**
+     * Get the value of options
+     */ 
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Set the value of options
+     *
+     * @return  self
+     */ 
+    public function setOptions($options)
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+   
 }
