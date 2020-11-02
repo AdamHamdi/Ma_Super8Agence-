@@ -14,6 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
@@ -118,8 +119,10 @@ class Property
      */
     private $options;
 
-    /**
-     * @ORM\Column(type="datetime"options={"nullable"=true})
+   /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTimeInterface|null
      */
     private $updated_at;
 
@@ -381,8 +384,12 @@ class Property
 
     
 
+  
+
     /**
-     * Get the value of updated_at
+     * Get $updated
+     *
+     * @return  DateTime
      */ 
     public function getUpdated_at()
     {
@@ -390,11 +397,13 @@ class Property
     }
 
     /**
-     * Set the value of updated_at
+     * Set $updated
+     *
+     * @param  DateTime  $updated_at  $updated
      *
      * @return  self
      */ 
-    public function setUpdated_at($updated_at)
+    public function setUpdated_at(DateTime $updated_at)
     {
         $this->updated_at = $updated_at;
 

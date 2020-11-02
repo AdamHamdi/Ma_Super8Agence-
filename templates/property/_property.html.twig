@@ -1,5 +1,10 @@
 <div class="card mb-4">
+{% if property.filename %}
+ {# <img src="/images/properties/{{property.imageFile}}" class="card-img-top" alt="" width="200px" height="200px"> #}
+ <img src="{{ vich_uploader_asset(property,'imageFile')| imagine_filter('thumb')}}" class="card-img-top" alt="" width="200px" height="200px">
+    {% endif %}
     <div class="card body">
+    
         <h5 class="card-title">
             <a href="{{ path('property.show',{id:property.id, slug: property.slug} ) }}">{{ property.title }}</a> </h5>
         <!-- <p class="card-text">{{ property.description |nl2br}}</p> -->
