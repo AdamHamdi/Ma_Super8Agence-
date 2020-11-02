@@ -12,6 +12,7 @@ use Cocur\Slugify\RuleProvider\RuleProviderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -118,9 +119,10 @@ class Property
     private $options;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime")|null
      */
     private $updated_at;
+    
     public function __construct()
     {
         $this->created_at= new \DateTime();
@@ -370,6 +372,9 @@ class Property
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;
+        if($this->imageFile instanceof UploadedFile){
+            $this->updated_at =new \DateTime('now');
+        }
 
         return $this;
     }
