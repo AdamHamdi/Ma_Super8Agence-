@@ -21,6 +21,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 class AdminPropertyController extends AbstractController
 {
@@ -70,15 +73,17 @@ class AdminPropertyController extends AbstractController
      * @param Property $property
      * @return \Syfony\Component\HttpFoundation\Response
      */
-    public function edit (Property $property, Request $request){
-       
+    // public function edit (Property $property, Request $request, CacheManager $cacheManager, UploaderHelper $uploaderHelper){
+        public function edit (Property $property, Request $request){ 
         //ajouter une option video 9
         // $option = new Option();
         // $property->addOption($option);
         $form=$this->createForm(PropertyType::class,$property);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-                 
+                //  if($property->getImageFile() instanceof UploadedFile){
+                //      $cacheManager->remove($uploaderHelper->asset($property,'imageFile'));
+                //  }
                
                  $this->em->flush();
                  $this->addFlash('success','Ce bien a été modifié avec success');
