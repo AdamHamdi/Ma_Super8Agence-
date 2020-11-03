@@ -4,51 +4,71 @@ namespace App\Listener;
 use App\Entity\Property;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
+
 class ImageCacheSubscriber implements EventSubscriber{
 
-    protected $cacheManager;
+      /**
+     * CacheManager
+     *
+     * @var CacheManager
+     */
+    private $cacheManager;
 
-    protected $uploaderHelper;
+    /**
+     * UploaderHelper
+     *
+     * @var UploaderHelper
+     */
+    private $uploaderHelper;
+   
+
+    
 
    public function __construct(CacheManager $cacheManager ,UploaderHelper $uploaderHelper)
    {
        
        $this->cacheManager = $cacheManager;
         $this->uploderHelper = $uploaderHelper;
+        
+    }
+    public function getSubscribedEvents()
+    {
+        return [
+            'preRemove',
+            'postUpdate'
+        ];
     }
 
-public function getSubscribedEvents()
-{
-    return [
-        'preRemove',
-        'preUpdate'
-    ];
-}
-public function preRemove(LifecycleEventArgs $args){
-    $entity= $args->getEntity();
-if(!$entity instanceof Property ){
-    return ;
-}
-$this->cacheManager->remove($this->uploaderHelper->asset($entity,'imageFile'));
+    public function preRemove(LifecycleEventArgs $args)
+    {
 
-}
+        $entity = $args->getEntity();
+        if (!$entity instanceof Property) {
+            $this->cacheManager->remove($this->uploaderHelper->asset($entity, 'imageFile'));
+        }
+           
+        
+    }
 
+    public function postUpdate(LifecycleEventArgs $args)
+    {
+        
 
-public function preUpdate(PreUpdateEventArgs $args){
- $entity= $args->getEntity();
-if(!$entity instanceof Property ){
-    return ;
-}
-if ($entity->getImageFile() instanceof UploadedFile){
- $this->cacheManager->remove($this->uploaderHelper->asset($entity,'imageFile'));
-}
-dump($args->getObject());
+        $entity = $args->getEntity();
+        if ($entity instanceof Property) {
+            return;
+        }
+
+            if ($entity->getImageFile() instanceof UploadedFile) {
+                $this->cacheManager->remove($this->uploaderHelper->asset($entity, 'imageFile'));
+            }
+        
+    
 }
 
 }
