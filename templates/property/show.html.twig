@@ -5,13 +5,28 @@
 
             <div class="col-md-8 mx-auto">
                 {% if property.filename %} {# <img src="/images/properties/{{property.imageFile}}" class="card-img-top" alt="" width="200px" height="200px"> #}
-                <img src="{{ vich_uploader_asset(property,'imageFile')| imagine_filter('medium')}}" class="card-img-top" alt="" width="200px" height="200px"> {% endif %}
+                <img src="{{ vich_uploader_asset(property,'imageFile')| imagine_filter('medium')}}" class="card-img-top" alt=""> {% endif %}
             </div>
             <div class="col-md-4">
                 <h1 class="mx-auto">{{ property.title}}</h1>
                 <h2 class="mx-auto">{{ property.rooms}} pieces . {{ property.surface}} m<sup>2</sup></h2>
                 <div class="text-primary" style="font-weight:bold ; font-size:2rem">{{ property.FormattedPrice }} €</div>
                 <a href="#" class="btn btn-primary"> Contacter l'agence</a>
+                <div id="contactForm" class="mt-4">
+                    {{ form_start(form)}}
+                    <div class="row">
+                        <div class="col">{{ form_row(form.firstname)}}</div>
+                        <div class="col">{{ form_row(form.lastname)}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">{{ form_row(form.phone)}}</div>
+                        <div class="col">{{ form_row(form.email)}}</div>
+                    </div>
+                    {{ form_rest(form)}}
+                    <div class="form-group">
+                        <div class="button btn btn-primary">Envoyer</div>
+                    </div>{{ form_end(form)}}
+                </div>
             </div>
 
         </div>
