@@ -29,6 +29,7 @@ class PropertyType extends AbstractType
                   //->add('heat')
                   ->add('heat', ChoiceType::class, ['choices'=> array_flip(Property::HEAT) ])
                   ->add('options',EntityType::class,[
+                    'required'=>false,
                       'class' => Option::class,
                       'choice_label'=>'name',
                       'multiple' =>true

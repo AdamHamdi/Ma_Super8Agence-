@@ -8,6 +8,13 @@ liip_imagine:
                             size: [360,230]
                             mode: outbound
                             allow_upscale: true
+                medium:
+                    quality: 75
+                    filters:
+                        thumbnail:
+                            size: [600,530]
+                            mode: outbound
+                            allow_upscale: true
 
      # valid drivers options include "gd" or "gmagick" or "imagick"
         driver: "gd"

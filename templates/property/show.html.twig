@@ -3,8 +3,9 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-8">
-
+            <div class="col-md-8 mx-auto">
+                {% if property.filename %} {# <img src="/images/properties/{{property.imageFile}}" class="card-img-top" alt="" width="200px" height="200px"> #}
+                <img src="{{ vich_uploader_asset(property,'imageFile')| imagine_filter('medium')}}" class="card-img-top" alt="" width="200px" height="200px"> {% endif %}
             </div>
             <div class="col-md-4">
                 <h1 class="mx-auto">{{ property.title}}</h1>
@@ -18,44 +19,45 @@
 
 </div>
 <div class="container mt-5">
+    <p>{{ property.description|nl2br}}</p>
     <div class="row">
 
-        <div class="col-md-8">
-
-
-            <nav class="nav nav-tabs mb-4" id='tabs'></nav>
-            <p>{{ property.description|nl2br}}</p>
-            <div class="row">
-                <div class="col-md-8">
-                    <h2>Caractéristiques</h2>
-                    <table class="table table-striped">
-                        <tr>
-                            <td>Surface habitable</td>
-                            <td>{{ property.surface}}m<sup>2</sup></td>
-                        </tr>
-                        <tr>
-                            <td>Pièces</td>
-                            <td>{{ property.rooms}} </td>
-                        </tr>
-                        <tr>
-                            <td>Chambres</td>
-                            <td>{{ property.bedrooms}}</td>
-                        </tr>
-                        <tr>
-                            <td>Etage</td>
-                            <td>{{ property.floor}}</td>
-                        </tr>
-                        <tr>
-                            <td>Chauffage</td>
-                            <td>{{ property.heatType}}</td>
-                        </tr>
-                    </table><br><br>
-                </div>
-                <div class="col-md-4">
-                    <h2>Spécificités</h2>
-                </div>
+        <div class="col-md-8 mx-auto">
+            <h2>Caractéristiques</h2>
+            <table class="table table-striped">
+                <tr>
+                    <td>Surface habitable</td>
+                    <td>{{ property.surface}}m<sup>2</sup></td>
+                </tr>
+                <tr>
+                    <td>Pièces</td>
+                    <td>{{ property.rooms}} </td>
+                </tr>
+                <tr>
+                    <td>Chambres</td>
+                    <td>{{ property.bedrooms}}</td>
+                </tr>
+                <tr>
+                    <td>Etage</td>
+                    <td>{{ property.floor}}</td>
+                </tr>
+                <tr>
+                    <td>Chauffage</td>
+                    <td>{{ property.heatType}}</td>
+                </tr>
+            </table><br><br>
+        </div>
+        <div class="col-md-4">
+            <h2>Spécificités</h2>
+            <div class="ul list group">
+                {% for option in property.options %}
+                <div class="li list-group-item">
+                    {{option.name }}
+                </div>{% endfor %}
             </div>
         </div>
-       
+    </div>
+</div>
 
-        {% endblock %}
+
+{% endblock %}
