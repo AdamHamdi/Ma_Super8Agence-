@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %} {% block title %}{{ property.title}}:{% endblock %} {% block body %}
 <div class="jumbotron">
     <div class="container">
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
         <div class="row">
 
             <div class="col-md-8 mx-auto">
@@ -24,7 +29,7 @@
                     </div>
                     {{ form_rest(form)}}
                     <div class="form-group">
-                        <div class="button btn btn-primary">Envoyer</div>
+                        <button class="btn btn-primary">Envoyer</button>
                     </div>{{ form_end(form)}}
                 </div>
             </div>
