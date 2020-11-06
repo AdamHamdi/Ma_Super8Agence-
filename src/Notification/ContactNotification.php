@@ -20,8 +20,8 @@ class ContactNotification{
     
     public function notify(Contact $contact){
         $message =(new \Swift_Message('Agence :'.$contact->getProperty()->getTitle()))
-                    ->setFrom('noreply@sagence.fr')
-                    ->setTo('adamhamdi12@gmail.com')
+                    ->setFrom('noreply@hamdi.com')
+                    ->setTo('adam@hamdi.com')
                     ->setReplyTo($contact->getEmail())
                     ->setBody($this->renderer->render('emails/contact.html.twig',[
                         'contact'=>$contact

@@ -1,5 +1,12 @@
-<h1>Nouveau contact</h1>
+<h1>
+    Demande de contact{{ contact.property.title}}
+</h1>
+<p> une nouvelle personne souhaiteras obtenir plus d'information à propos du bien
+    <a href="{{ url('property.show',{id:contact.property.id, slug:contact.property.slug}) }}" class="">{{ contact.property.title }}</a>
+</p>
+
+<h1> Nouveau contact</h1>
 <p>PreNom : {{contact.firstname}}</p>
 <p>Nom : {{contact.lastname}}</p>
 <p>e-mail : {{contact.email}}</p>
-<p>Message : {{contact.message|raw}}</p>
+<p>Message : {{contact.message|nl2br}}</p>

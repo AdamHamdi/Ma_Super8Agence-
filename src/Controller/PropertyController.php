@@ -92,14 +92,15 @@ class PropertyController extends AbstractController
                 'id'=>$property->getId(),
                 'slug'=>$property->getSlug()
                 
-            ]);
+            ],301);
         }
         $contact = new Contact();
         $contact->setProperty($property);
         $form=$this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $contactNotification->notify($contact);
-            $this->addFlash('success','Votre email a été envoyé');
+            $this->addFlash('success','Votre email a été bien envoyé');
             return $this->redirectToRoute('property.show',[
                 'id'=>$property->getId(),
                 'slug'=>$property->getSlug()
