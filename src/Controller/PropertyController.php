@@ -7,6 +7,7 @@ use App\Entity\Property;
 use App\Entity\PropertySearch;
 use App\form\PropertySearchType;
 use App\form\ContactType;
+use App\Notification\ContactNotification;
 use App\Repository\PropertyRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -81,7 +82,7 @@ class PropertyController extends AbstractController
     /**
      * @Route("/biens/{slug}-{id}", name="property.show" ,requirements={"slug":"[a-z0-9\-]*"})
      */
-    public function show (Property $property ,$slug ,$id ,Request $request): Response
+    public function show (Property $property ,$slug ,$id ,Request $request, ContactNotification $contactNotification): Response
     {
         
         //$form->handleRequest($request);
@@ -97,6 +98,7 @@ class PropertyController extends AbstractController
         $contact->setProperty($property);
         $form=$this->createForm(ContactType::class, $contact);
         if ($form->isSubmitted() && $form->isValid()){
+            $contactNotification->notify($contact);
             $this->addFlash('success','Votre email a été envoyé');
             return $this->redirectToRoute('property.show',[
                 'id'=>$property->getId(),
