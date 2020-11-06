@@ -5,7 +5,10 @@
         <div class="alert alert-success">
             {{ message }}
         </div>
-        {% endfor %}
+        {% endfor %} {% if not form.vars.valid %}
+        <div class="alert alert-danger">
+            Erreur je ne sais pas quoi!
+        </div>{% endif %}
         <div class="row">
 
             <div class="col-md-8 mx-auto">
