@@ -79,6 +79,15 @@
                 </div>{% endfor %}
             </div>
         </div>
+        <div class="col-md-4">
+            <h2>Spécificités</h2>
+            <div class="ul list group">
+                {% for option in property.options %}
+                <div class="li list-group-item">
+                    {{option.name }}
+                </div>{% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 
